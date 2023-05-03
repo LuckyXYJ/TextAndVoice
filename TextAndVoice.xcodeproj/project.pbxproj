@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		303DEA042A0298C20009B44D /* TextToVoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303DEA032A0298C20009B44D /* TextToVoiceViewController.swift */; };
+		303DEA062A0298DC0009B44D /* VoiceToTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303DEA052A0298DC0009B44D /* VoiceToTextViewController.swift */; };
+		303DEA0A2A02A8780009B44D /* XZTTSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303DEA092A02A8780009B44D /* XZTTSManager.swift */; };
+		303DEA0D2A02ABDE0009B44D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 303DEA0C2A02ABDE0009B44D /* AVFoundation.framework */; };
 		30A30EF129F2E6FB00793982 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A30EF029F2E6FB00793982 /* AppDelegate.swift */; };
 		30A30EF329F2E6FB00793982 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A30EF229F2E6FB00793982 /* SceneDelegate.swift */; };
 		30A30EF529F2E6FB00793982 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A30EF429F2E6FB00793982 /* ViewController.swift */; };
@@ -16,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		303DEA032A0298C20009B44D /* TextToVoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToVoiceViewController.swift; sourceTree = "<group>"; };
+		303DEA052A0298DC0009B44D /* VoiceToTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceToTextViewController.swift; sourceTree = "<group>"; };
+		303DEA092A02A8780009B44D /* XZTTSManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XZTTSManager.swift; sourceTree = "<group>"; };
+		303DEA0C2A02ABDE0009B44D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		30A30EED29F2E6FB00793982 /* TextAndVoice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextAndVoice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A30EF029F2E6FB00793982 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30A30EF229F2E6FB00793982 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +39,35 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				303DEA0D2A02ABDE0009B44D /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		303DEA022A0295700009B44D /* TextAndVoice */ = {
+			isa = PBXGroup;
+			children = (
+				303DEA092A02A8780009B44D /* XZTTSManager.swift */,
+			);
+			path = TextAndVoice;
+			sourceTree = "<group>";
+		};
+		303DEA0B2A02ABDE0009B44D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				303DEA0C2A02ABDE0009B44D /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		30A30EE429F2E6FB00793982 = {
 			isa = PBXGroup;
 			children = (
 				30A30EEF29F2E6FB00793982 /* TextAndVoice */,
 				30A30EEE29F2E6FB00793982 /* Products */,
+				303DEA0B2A02ABDE0009B44D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,9 +82,12 @@
 		30A30EEF29F2E6FB00793982 /* TextAndVoice */ = {
 			isa = PBXGroup;
 			children = (
+				303DEA022A0295700009B44D /* TextAndVoice */,
 				30A30EF029F2E6FB00793982 /* AppDelegate.swift */,
 				30A30EF229F2E6FB00793982 /* SceneDelegate.swift */,
 				30A30EF429F2E6FB00793982 /* ViewController.swift */,
+				303DEA032A0298C20009B44D /* TextToVoiceViewController.swift */,
+				303DEA052A0298DC0009B44D /* VoiceToTextViewController.swift */,
 				30A30EF629F2E6FB00793982 /* Main.storyboard */,
 				30A30EF929F2E6FC00793982 /* Assets.xcassets */,
 				30A30EFB29F2E6FC00793982 /* LaunchScreen.storyboard */,
@@ -139,8 +168,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				30A30EF529F2E6FB00793982 /* ViewController.swift in Sources */,
+				303DEA0A2A02A8780009B44D /* XZTTSManager.swift in Sources */,
 				30A30EF129F2E6FB00793982 /* AppDelegate.swift in Sources */,
+				303DEA062A0298DC0009B44D /* VoiceToTextViewController.swift in Sources */,
 				30A30EF329F2E6FB00793982 /* SceneDelegate.swift in Sources */,
+				303DEA042A0298C20009B44D /* TextToVoiceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +319,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TextAndVoice/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -294,12 +327,12 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xyj.TextAndVoice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -314,6 +347,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TextAndVoice/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -321,12 +355,12 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xyj.TextAndVoice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
