@@ -73,11 +73,23 @@ class XZTTSManager: NSObject {
         clearResources()
     }
     
-    func isSpeaking() -> Bool {
+    
+    /// 是否有存在的阅读器
+    /// - Returns: bool
+    func isSpeaked() -> Bool {
+        if let syn = speechSynthesizer {
+            return true
+        }
+        return false
+    }
+    
+    /// 是否正在阅读
+    /// - Returns: bool
+    func isPaused() -> Bool {
         guard let syn = speechSynthesizer else {
             return false
         }
-        return syn.isSpeaking
+        return syn.isPaused
     }
     
     private func clearResources() {

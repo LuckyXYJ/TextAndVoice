@@ -23,18 +23,28 @@ class TextToVoiceViewController: UIViewController {
     
     @IBAction func startRead(_ sender: Any) {
         
-        if XZTTSManager.shared.isSpeaking() {
-            button.setTitle("继续阅读", for: .normal)
-            XZTTSManager.shared.continueSpeaking()
-        } else {
-            button.setTitle("暂停阅读", for: .normal)
+        guard XZTTSManager.shared.isSpeaked() else {
             XZTTSManager.shared.startRead(content: content, delegate: self)
+            button.setTitle("暂停阅读", for: .normal)
+            return
+        }
+        
+        if XZTTSManager.shared.isPaused() {
+            XZTTSManager.shared.continueSpeaking()
+            button.setTitle("暂停阅读", for: .normal)
+        } else {
+            XZTTSManager.shared.pauseSpeaking()
+            button.setTitle("继续阅读", for: .normal)
         }
     }
     
     @IBAction func stopRead(_ sender: Any) {
         XZTTSManager.shared.stopSpeaking()
         button.setTitle("开始阅读", for: .normal)
+    }
+    
+    deinit {
+        XZTTSManager.shared.stopSpeaking()
     }
 }
 

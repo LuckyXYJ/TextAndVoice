@@ -11,6 +11,7 @@
 		303DEA062A0298DC0009B44D /* VoiceToTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303DEA052A0298DC0009B44D /* VoiceToTextViewController.swift */; };
 		303DEA0A2A02A8780009B44D /* XZTTSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303DEA092A02A8780009B44D /* XZTTSManager.swift */; };
 		303DEA0D2A02ABDE0009B44D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 303DEA0C2A02ABDE0009B44D /* AVFoundation.framework */; };
+		303DEA0F2A0688830009B44D /* XZASRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303DEA0E2A0688830009B44D /* XZASRManager.swift */; };
 		30A30EF129F2E6FB00793982 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A30EF029F2E6FB00793982 /* AppDelegate.swift */; };
 		30A30EF329F2E6FB00793982 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A30EF229F2E6FB00793982 /* SceneDelegate.swift */; };
 		30A30EF529F2E6FB00793982 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A30EF429F2E6FB00793982 /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 		303DEA052A0298DC0009B44D /* VoiceToTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceToTextViewController.swift; sourceTree = "<group>"; };
 		303DEA092A02A8780009B44D /* XZTTSManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XZTTSManager.swift; sourceTree = "<group>"; };
 		303DEA0C2A02ABDE0009B44D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		303DEA0E2A0688830009B44D /* XZASRManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XZASRManager.swift; sourceTree = "<group>"; };
 		30A30EED29F2E6FB00793982 /* TextAndVoice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextAndVoice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A30EF029F2E6FB00793982 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30A30EF229F2E6FB00793982 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,6 +34,8 @@
 		30A30EF929F2E6FC00793982 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30A30EFC29F2E6FC00793982 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30A30EFE29F2E6FC00793982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30C749452A074BC400335F56 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		30C749462A074BD300335F56 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				303DEA092A02A8780009B44D /* XZTTSManager.swift */,
+				303DEA0E2A0688830009B44D /* XZASRManager.swift */,
 			);
 			path = TextAndVoice;
 			sourceTree = "<group>";
@@ -92,6 +97,8 @@
 				30A30EF929F2E6FC00793982 /* Assets.xcassets */,
 				30A30EFB29F2E6FC00793982 /* LaunchScreen.storyboard */,
 				30A30EFE29F2E6FC00793982 /* Info.plist */,
+				30C749452A074BC400335F56 /* Debug.xcconfig */,
+				30C749462A074BD300335F56 /* Release.xcconfig */,
 			);
 			path = TextAndVoice;
 			sourceTree = "<group>";
@@ -168,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30A30EF529F2E6FB00793982 /* ViewController.swift in Sources */,
+				303DEA0F2A0688830009B44D /* XZASRManager.swift in Sources */,
 				303DEA0A2A02A8780009B44D /* XZTTSManager.swift in Sources */,
 				30A30EF129F2E6FB00793982 /* AppDelegate.swift in Sources */,
 				303DEA062A0298DC0009B44D /* VoiceToTextViewController.swift in Sources */,
@@ -314,12 +322,13 @@
 		};
 		30A30F0229F2E6FC00793982 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30C749452A074BC400335F56 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TextAndVoice/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -334,6 +343,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -342,12 +352,13 @@
 		};
 		30A30F0329F2E6FC00793982 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30C749462A074BD300335F56 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TextAndVoice/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -362,6 +373,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
