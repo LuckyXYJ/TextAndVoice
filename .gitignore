@@ -1,3 +1,6 @@
-
+UserInterfaceState.xcuserstate
+# Xcode
+.DS_Store
 *.xcconfig
 *.xcbkptlist
+xcuserdata

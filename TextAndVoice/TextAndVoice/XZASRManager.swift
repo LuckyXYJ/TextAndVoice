@@ -11,7 +11,7 @@ import Speech
 import AVFoundation
 import Accelerate
 
-protocol AIASRManagerDelegate: AnyObject {
+protocol XZASRManagerDelegate: AnyObject {
     
     /// 实时语音识别结果
     /// - Parameter text: 识别的所有内容
@@ -22,11 +22,11 @@ protocol AIASRManagerDelegate: AnyObject {
 
 }
 
-class AIASRManager {
+class XZASRManager {
     
-    static let shared = AIASRManager()
+    static let shared = XZASRManager()
     
-    weak var delegate: AIASRManagerDelegate?
+    weak var delegate: XZASRManagerDelegate?
     var audioEngine: AVAudioEngine?
     var speechRecognizer: SFSpeechRecognizer?
     var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -66,7 +66,7 @@ class AIASRManager {
     }
 }
 
-extension AIASRManager {
+extension XZASRManager {
     
     private func checkPermission() {
         

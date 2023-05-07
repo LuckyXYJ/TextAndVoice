@@ -52,8 +52,8 @@ class XZTTSManager: NSObject {
         utterance.volume = volume
         utterance.rate = rate
         // 不设置 使用系统默认
-        // let voice = AVSpeechSynthesisVoice(language: Locale.current.languageCode)
-        // utterance.voice = voice
+        let voice = AVSpeechSynthesisVoice(language: "zh-CN")
+        utterance.voice = voice
         speechSynthesizer?.speak(utterance)
     }
 

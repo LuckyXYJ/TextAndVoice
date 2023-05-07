@@ -331,6 +331,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TextAndVoice/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "开启麦克风权限以实现语音转文字效果";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "开启语音识别权限以实现语音转文字效果";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -361,6 +363,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TextAndVoice/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "开启麦克风权限以实现语音转文字效果";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "开启语音识别权限以实现语音转文字效果";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
