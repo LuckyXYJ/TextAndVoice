@@ -8,6 +8,8 @@
 import UIKit
 
 class VoiceToTextViewController: UIViewController {
+    
+    private var oldText: String = ""
 
     @IBOutlet weak var textView: UITextView!
     
@@ -25,6 +27,7 @@ class VoiceToTextViewController: UIViewController {
         if speakButton.titleLabel?.text == "开始说话" {
             XZASRManager.shared.delegate = self
             XZASRManager.shared.startRecording()
+            self.oldText = self.textView.text
             speakButton.setTitle("结束说话", for: .normal)
             return
         }
@@ -39,8 +42,9 @@ class VoiceToTextViewController: UIViewController {
 }
 
 extension VoiceToTextViewController: XZASRManagerDelegate {
+    
     func speakRecognitionResult(text: String?) {
-        self.textView.text = self.textView.text + (text ?? "")
+        self.textView.text = self.oldText + (text ?? "")
     }
     
     func speakRecognitionAutoEnd() {
