@@ -32,6 +32,19 @@ class XZASRManager {
     var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     var recognitionTask: SFSpeechRecognitionTask?
     
+    private var timer: Timer?
+    
+    /// 已经录制的时间
+    private var recordedSeconds: Int = 0
+    
+    /// 上次转文字回调结果的时间
+    private var lastRecordedSeconds: Int = 0
+    
+    /// 自动关闭录制等待时间
+    private let autoStopSeconds: Int = 5
+    
+    
+    
     func startRecording() {
         
         checkPermission()
@@ -58,6 +71,7 @@ class XZASRManager {
             print("Error starting audio engine: \(error)")
             self.stopRecording()
         }
+        self.timeStart()
     }
     
     func stopRecording() {
@@ -102,7 +116,7 @@ extension XZASRManager {
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
-            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+//            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             print("Error setting up audio session: \(error)")
         }
@@ -114,39 +128,62 @@ extension XZASRManager {
         
         recognitionRequest.shouldReportPartialResults = true
         
-        recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { result, error in
+        recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { [weak self] result, error in
             guard let result = result else {
                 if let error = error {
                     print("Recognition task error: \(error)")
                 } else {
                     print("Unknown recognition error")
                 }
+                self?.stopRecording()
+                return
+            }
+            
+            if result.isFinal {
+                self?.stopRecording()
                 return
             }
             
             let res = result.transcriptions.last?.formattedString
-            self.delegate?.speakRecognitionResult(text: res)
-            
-            print(result.bestTranscription.formattedString)
-            
-            if result.isFinal {
-                // 结束后返回最优结果
-                print(result.bestTranscription.formattedString)
-                let res = result.bestTranscription.formattedString
-                self.delegate?.speakRecognitionResult(text: res)
-                self.stopRecording()
-            }
+            self?.delegate?.speakRecognitionResult(text: res)
+            self?.lastRecordedSeconds = self?.recordedSeconds ?? 0
         })
     }
     
     private func releaseEngine() {
         if let inputNode = audioEngine?.inputNode {
             inputNode.removeTap(onBus: 0)
+            inputNode.reset()
             audioEngine?.stop()
             recognitionRequest?.endAudio()
             recognitionTask?.cancel()
         }
-        recognitionRequest = nil
+//        recognitionRequest = nil
         recognitionTask = nil
+//        speechRecognizer = nil
+//        audioEngine = nil
+        
+        timeStop()
+    }
+    
+    private func timeStart() {
+        timeStop()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] timer in
+            self?.recordedSeconds += 1
+            self?.autoStop()
+        })
+    }
+    
+    private func timeStop() {
+        timer?.invalidate()
+        timer = nil
+        recordedSeconds = 0
+        lastRecordedSeconds = 0
+    }
+    
+    private func autoStop() {
+        if recordedSeconds - lastRecordedSeconds > autoStopSeconds {
+            self.stopRecording()
+        }
     }
 }
