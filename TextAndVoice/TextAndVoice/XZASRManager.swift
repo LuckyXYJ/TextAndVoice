@@ -10,6 +10,7 @@ import AVFAudio
 import Speech
 import AVFoundation
 import Accelerate
+import UIKit
 
 protocol XZASRManagerDelegate: AnyObject {
     
@@ -27,11 +28,14 @@ class XZASRManager {
     static let shared = XZASRManager()
     
     weak var delegate: XZASRManagerDelegate?
+    
     var audioEngine: AVAudioEngine?
     var speechRecognizer: SFSpeechRecognizer?
     var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     var recognitionTask: SFSpeechRecognitionTask?
     
+    
+    /// 定时器，处理录音一段时间无输入后自动退出
     private var timer: Timer?
     
     /// 已经录制的时间
@@ -43,11 +47,15 @@ class XZASRManager {
     /// 自动关闭录制等待时间
     private let autoStopSeconds: Int = 5
     
-    
+    /// 系统权限弹窗只会弹出一次，多次调用无意义浪费时间。每次打开应用最多执行一次
+    private var hasOnceRequestPermission: Bool = false
     
     func startRecording() {
-        
-        checkPermission()
+    
+        guard checkPermission() else {
+            print("无权限退出")
+            return
+        }
         
         initEngine()
 
@@ -81,32 +89,6 @@ class XZASRManager {
 }
 
 extension XZASRManager {
-    
-    private func checkPermission() {
-        
-        SFSpeechRecognizer.requestAuthorization { status in
-            if status == .authorized {
-                // print("已授权")
-            } else {
-                // print("未授权")
-            }
-        }
-        
-        let permissionStatus = AVAudioSession.sharedInstance().recordPermission
-        switch permissionStatus {
-        case .granted:
-            // print("麦克风授权成功")
-            break
-        case .denied:
-            // print("麦克风授权被拒绝")
-            break
-        case .undetermined:
-            // print("麦克风授权状态未确定")
-            break
-        default:
-            break
-        }
-    }
     
     private func initEngine() {
         
@@ -186,4 +168,37 @@ extension XZASRManager {
             self.stopRecording()
         }
     }
+}
+
+// MARK: 权限
+extension XZASRManager {
+    
+    // 依次请求权限
+    private func requestPermission(_ complete:@escaping (() -> Void)) {
+        hasOnceRequestPermission = true
+        SFSpeechRecognizer.requestAuthorization { status in
+            AVCaptureDevice.requestAccess(for: .audio) { granted in
+                complete()
+            }
+        }
+    }
+    
+    
+    /// 判断权限
+    /// - Returns: 是否有权限
+    private func checkPermission() -> Bool {
+    
+        let authorizationStatus = SFSpeechRecognizer.authorizationStatus()
+        let permissionStatus = AVAudioSession.sharedInstance().recordPermission
+        
+        guard authorizationStatus == .authorized && permissionStatus == .granted else {
+            
+            if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            return false
+        }
+        return true
+    }
+    
 }
