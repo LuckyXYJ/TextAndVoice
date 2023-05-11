@@ -75,24 +75,35 @@
                                     <action selector="speakAction:" destination="ksy-vb-PBI" eventType="touchUpInside" id="ha6-vp-iko"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gmi-Yn-XCy">
+                                <rect key="frame" x="46.666666666666657" y="468.66666666666674" width="300" height="150"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="kNz-Ty-EJo"/>
+                                    <constraint firstAttribute="height" constant="150" id="weU-nu-Z0C"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZgH-5o-sPf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="nek-eb-DJP" firstAttribute="centerY" secondItem="C1l-Rc-Qzy" secondAttribute="centerY" id="5cw-BP-yEZ"/>
                             <constraint firstItem="nek-eb-DJP" firstAttribute="centerX" secondItem="C1l-Rc-Qzy" secondAttribute="centerX" id="KTa-sG-qT1"/>
+                            <constraint firstItem="gmi-Yn-XCy" firstAttribute="top" secondItem="nek-eb-DJP" secondAttribute="bottom" constant="30" id="Knn-sL-z6d"/>
                             <constraint firstItem="Ccc-5o-4No" firstAttribute="centerX" secondItem="C1l-Rc-Qzy" secondAttribute="centerX" id="gxZ-du-7TQ"/>
                             <constraint firstItem="nek-eb-DJP" firstAttribute="top" secondItem="Ccc-5o-4No" secondAttribute="bottom" constant="100" id="kbM-lN-u6b"/>
+                            <constraint firstItem="gmi-Yn-XCy" firstAttribute="centerX" secondItem="C1l-Rc-Qzy" secondAttribute="centerX" id="xMR-b4-H4w"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="speakButton" destination="nek-eb-DJP" id="Jrp-bH-Vbl"/>
                         <outlet property="textView" destination="Ccc-5o-4No" id="JMo-XK-0JA"/>
+                        <outlet property="waveBgView" destination="gmi-Yn-XCy" id="aAW-Tf-jln"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NMO-A4-4qz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1173" y="374"/>
+            <point key="canvasLocation" x="1171.7557251908397" y="373.94366197183098"/>
         </scene>
         <!--Text To Voice View Controller-->
         <scene sceneID="Z1k-CM-XaU">

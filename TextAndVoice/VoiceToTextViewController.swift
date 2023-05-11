@@ -15,10 +15,16 @@ class VoiceToTextViewController: UIViewController {
     
     @IBOutlet weak var speakButton: UIButton!
     
+    @IBOutlet var waveBgView: UIView!
+    
+    var waveView: XZASRWaveView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        waveView = XZASRWaveView(frame: CGRect(x: 0, y: 0, width: 300, height: 150))
+        self.waveBgView.addSubview(waveView!)
     }
     
 
@@ -49,5 +55,9 @@ extension VoiceToTextViewController: XZASRManagerDelegate {
     
     func speakRecognitionAutoEnd() {
         speakButton.setTitle("开始说话", for: .normal)
+    }
+    
+    func speakRecognitionWave(array: [Float]) {
+        self.waveView?.changeVoice(amplitudes: array)
     }
 }

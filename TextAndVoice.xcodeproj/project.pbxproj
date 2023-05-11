@@ -18,6 +18,7 @@
 		30A30EF829F2E6FB00793982 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30A30EF629F2E6FB00793982 /* Main.storyboard */; };
 		30A30EFA29F2E6FC00793982 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30A30EF929F2E6FC00793982 /* Assets.xcassets */; };
 		30A30EFD29F2E6FC00793982 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30A30EFB29F2E6FC00793982 /* LaunchScreen.storyboard */; };
+		30C749482A0D2DEF00335F56 /* XZASRWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C749472A0D2DEF00335F56 /* XZASRWaveView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		30A30EFE29F2E6FC00793982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30C749452A074BC400335F56 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		30C749462A074BD300335F56 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		30C749472A0D2DEF00335F56 /* XZASRWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XZASRWaveView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				303DEA092A02A8780009B44D /* XZTTSManager.swift */,
 				303DEA0E2A0688830009B44D /* XZASRManager.swift */,
+				30C749472A0D2DEF00335F56 /* XZASRWaveView.swift */,
 			);
 			path = TextAndVoice;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 				303DEA0F2A0688830009B44D /* XZASRManager.swift in Sources */,
 				303DEA0A2A02A8780009B44D /* XZTTSManager.swift in Sources */,
 				30A30EF129F2E6FB00793982 /* AppDelegate.swift in Sources */,
+				30C749482A0D2DEF00335F56 /* XZASRWaveView.swift in Sources */,
 				303DEA062A0298DC0009B44D /* VoiceToTextViewController.swift in Sources */,
 				30A30EF329F2E6FB00793982 /* SceneDelegate.swift in Sources */,
 				303DEA042A0298C20009B44D /* TextToVoiceViewController.swift in Sources */,
