@@ -45,41 +45,13 @@ class XZASRManager {
     private var lastRecordedSeconds: Int = 0
     
     /// 自动关闭录制等待时间
-    private let autoStopSeconds: Int = 5
+    public let autoStopSeconds: Int = 5
     
     /// 系统权限弹窗只会弹出一次，多次调用无意义浪费时间。每次打开应用最多执行一次
     private var hasOnceRequestPermission: Bool = false
     
     func startRecording() {
-    
-        guard checkPermission() else {
-            print("无权限退出")
-            return
-        }
-        
-        initEngine()
-
-        guard let inputNode = audioEngine?.inputNode else {
-            print("Audio engine has no input node")
-            self.stopRecording()
-            return
-        }
-        let recordingFormat = inputNode.outputFormat(forBus: 0)
-
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
-
-            self?.recognitionRequest?.append(buffer)
-        }
-
-        audioEngine?.prepare()
-
-        do {
-            try audioEngine?.start()
-        } catch {
-            print("Error starting audio engine: \(error)")
-            self.stopRecording()
-        }
-        self.timeStart()
+        self.start()
     }
     
     func stopRecording() {
@@ -89,47 +61,93 @@ class XZASRManager {
 }
 
 extension XZASRManager {
+
+    private func start() {
+        
+        // 第一次请求权限
+        if !hasOnceRequestPermission {
+            self.requestPermission {
+                self.start()
+            }
+            return
+        }
+        
+        guard checkPermission() else {
+            print("无权限退出")
+            return
+        }
+        
+        initASRManger()
+    }
+
     
-    private func initEngine() {
+    /// 初始化 &  开始录制
+    private func initASRManger() {
+        
+        try? AVAudioSession.sharedInstance().setCategory(.record, mode: .measurement, options: .duckOthers)
         
         speechRecognizer = SFSpeechRecognizer(locale: Locale.current)
         audioEngine = AVAudioEngine()
-        
-        let audioSession = AVAudioSession.sharedInstance()
-        do {
-            try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
-//            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
-        } catch {
-            print("Error setting up audio session: \(error)")
-        }
-        
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+        
         guard let recognitionRequest = recognitionRequest else {
             fatalError("Unable to create recognition request")
         }
-        
         recognitionRequest.shouldReportPartialResults = true
         
         recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { [weak self] result, error in
-            guard let result = result else {
-                if let error = error {
-                    print("Recognition task error: \(error)")
-                } else {
-                    print("Unknown recognition error")
-                }
-                self?.stopRecording()
-                return
-            }
-            
-            if result.isFinal {
-                self?.stopRecording()
-                return
-            }
-            
-            let res = result.transcriptions.last?.formattedString
-            self?.delegate?.speakRecognitionResult(text: res)
-            self?.lastRecordedSeconds = self?.recordedSeconds ?? 0
+            self?.recognitionTaskResult(result: result, error: error)
         })
+        
+        guard let inputNode = audioEngine?.inputNode else {
+            print("Audio engine has no input node")
+            self.stopRecording()
+            return
+        }
+        
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+
+            self?.recognitionRequest?.append(buffer)
+        }
+        
+        audioEngine?.prepare()
+
+        do {
+            try audioEngine?.start()
+        } catch {
+            print("Error starting audio engine: \(error)")
+            self.stopRecording()
+        }
+        
+        self.timeStart()
+    }
+    
+    
+    /// 识别结果
+    /// - Parameters:
+    ///   - result: result description
+    ///   - error: error description
+    private func recognitionTaskResult(result: SFSpeechRecognitionResult?, error: Error?) {
+        
+        guard let result = result else {
+            if let error = error {
+                print("Recognition task error: \(error)")
+            } else {
+                print("Unknown recognition error")
+            }
+            self.stopRecording()
+            return
+        }
+        
+        if result.isFinal {
+            self.stopRecording()
+            return
+        }
+        
+        let res = result.transcriptions.last?.formattedString
+        self.delegate?.speakRecognitionResult(text: res)
+        self.lastRecordedSeconds = self.recordedSeconds
     }
     
     private func releaseEngine() {
@@ -140,13 +158,13 @@ extension XZASRManager {
             recognitionRequest?.endAudio()
             recognitionTask?.cancel()
         }
-//        recognitionRequest = nil
         recognitionTask = nil
-//        speechRecognizer = nil
-//        audioEngine = nil
-        
         timeStop()
     }
+}
+
+// MARK: 记录时间，实现 x 秒无语音输入自动关闭
+extension XZASRManager {
     
     private func timeStart() {
         timeStop()
@@ -168,6 +186,7 @@ extension XZASRManager {
             self.stopRecording()
         }
     }
+    
 }
 
 // MARK: 权限
@@ -200,5 +219,4 @@ extension XZASRManager {
         }
         return true
     }
-    
 }
